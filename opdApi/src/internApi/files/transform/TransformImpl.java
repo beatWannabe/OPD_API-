@@ -97,8 +97,8 @@ public class TransformImpl {
         if (file.isDirectory()) {
             String[] fileNames = file.list();
             if (fileNames != null) {
-                for (int i = 0; i < fileNames.length; i++) {
-                    recurseFiles(new File(file, fileNames[i]));
+                for (String fileName : fileNames) {
+                    recurseFiles(new File(file, fileName));
                 }
             }
         } else {
