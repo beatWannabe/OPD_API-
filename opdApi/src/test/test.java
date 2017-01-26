@@ -41,7 +41,9 @@ public class test {
         //FilesImpl.adContentToFile("C:\\Users\\pdgomezl\\Desktop\\", "hologram.txt", "-0 -2 -3 -3 -25 -235 -3 -3 3 4 4");
         //FilesImpl.deleteFile("C:\\Users\\pdgomezl\\Desktop\\", "hologram.txt");
         //FilesImpl.cretaeNewDirectory("C:\\lelelele\\");
-        TransformImpl.excelToHtml("C:\\Users\\pdgomezl\\Desktop\\registroempleados.xlsx");
+        //TransformImpl.excelToHtml("C:\\Users\\pdgomezl\\Desktop\\registroempleados.xlsx");
+        //TransformImpl.decompressFile("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS.zip", "C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
+        TransformImpl.compressToZip("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
     }
     
 }

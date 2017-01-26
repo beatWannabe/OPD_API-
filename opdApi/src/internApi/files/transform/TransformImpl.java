@@ -1,13 +1,19 @@
 package internApi.files.transform;
 
 import java.awt.Desktop;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -23,6 +29,92 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  */
 public class TransformImpl {
+
+    private static ZipOutputStream zipOutputStream;
+    private final static int BUFFER = 2048;
+
+    public static void decompressFileZip(String file, String path) {
+        try {
+            BufferedOutputStream dest = null;
+            FileInputStream archivo = new FileInputStream(file);
+            File dirDestino = new File(path);
+            try (ZipInputStream zis = new ZipInputStream(new BufferedInputStream(archivo))) {
+                FileOutputStream archivoTerminal;
+                ZipEntry entrada;
+                int count;
+                int index;
+                byte data[] = new byte[BUFFER];
+                String rutaArchivo;
+                while ((entrada = zis.getNextEntry()) != null) {
+                    //System.out.println("Extracting: " + entry.getName() + " : " + informaticSizeFromBytes(entry.getSize()));
+                    rutaArchivo = entrada.getName();
+                    index = rutaArchivo.indexOf("/");
+                    rutaArchivo = rutaArchivo.substring(index + 1);
+                    if (rutaArchivo.trim().length() > 0) {
+                        try {
+                            dest = null;
+                            File fileDest = new File(dirDestino.getAbsolutePath() + "/" + rutaArchivo);
+                            if (entrada.isDirectory()) {
+                                fileDest.mkdirs();
+                            } else {
+                                if (fileDest.getParentFile().exists() == false) {
+                                    fileDest.getParentFile().mkdirs();
+                                }
+                                archivoTerminal = new FileOutputStream(fileDest);
+                                dest = new BufferedOutputStream(archivoTerminal, BUFFER);
+                                while ((count = zis.read(data, 0, BUFFER)) != -1) {
+                                    dest.write(data, 0, count);
+                                }
+                                dest.flush();
+                            }
+                        } finally {
+                            try {
+                                if (dest != null) {
+                                    dest.close();
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void compressToZip(String fileName)
+            throws IOException, FileNotFoundException {
+        File file = new File(fileName);
+        zipOutputStream = new ZipOutputStream(new FileOutputStream(file + ".zip"));
+        recurseFiles(file);
+        zipOutputStream.close();
+    }
+
+    private static void recurseFiles(File file)
+            throws IOException, FileNotFoundException {
+        if (file.isDirectory()) {
+            String[] fileNames = file.list();
+            if (fileNames != null) {
+                for (int i = 0; i < fileNames.length; i++) {
+                    recurseFiles(new File(file, fileNames[i]));
+                }
+            }
+        } else {
+            byte[] buf = new byte[1024];
+            int len;
+            ZipEntry zipEntry = new ZipEntry(file.toString());
+            FileInputStream fin = new FileInputStream(file);
+            try (BufferedInputStream in = new BufferedInputStream(fin)) {
+                zipOutputStream.putNextEntry(zipEntry);
+                while ((len = in.read(buf)) >= 0) {
+                    zipOutputStream.write(buf, 0, len);
+                }
+            }
+            zipOutputStream.closeEntry();
+        }
+    }
 
     //--------------------> transformExcelToHTML excel to html
     /**
@@ -91,7 +183,7 @@ public class TransformImpl {
             //newFile.delete();
         } catch (Exception e) {
             if (file != null) {
-                System.out.println("ocurrio eun error al intentar transformar el archivo [ " + file.getName() + " ] a HTML");
+                System.out.println("ocurrio un error al intentar transformar el archivo [ " + file.getName() + " ] a HTML");
             }
             System.out.println(e.getMessage());
         }
