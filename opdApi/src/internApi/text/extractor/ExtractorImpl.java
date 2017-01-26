@@ -5,6 +5,11 @@
  */
 package internApi.text.extractor;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author pdgomezl
@@ -60,4 +65,27 @@ public class ExtractorImpl {
         return incompleteText;
     }
 
+    public static List<File> getArchivesInDirectory(String path) {
+        File dir = new File(path);
+        File[] ficheros = dir.listFiles();
+        List<File> files = new ArrayList<>();
+        try {
+            if (dir.exists()) {
+                if (ficheros == null) {
+                    System.out.println("No hay ficheros en el directorio especificado");
+                } else {
+                    for (File fichero : ficheros) {
+                        //System.out.println(fichero.getName());
+                        files.add(fichero);
+                    }
+                }
+                return files;
+            } else {
+                System.out.println("No existe el directorio : " + dir.getPath());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return files;
+    }
 }
