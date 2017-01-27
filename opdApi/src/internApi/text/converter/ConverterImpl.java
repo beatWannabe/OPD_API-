@@ -20,6 +20,7 @@ public class ConverterImpl {
         double mb = bytes / 1048576.0;
         double gb = bytes / 1099511627776.0;
         double tb = bytes / 1208925819614629174706176.0;//*tb=proximo valor
+        //double ne = bytes / tb*2;
         //continue multiplicando al exponente 2
         DecimalFormat dec = new DecimalFormat("0.00");
 
