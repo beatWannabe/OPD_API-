@@ -79,7 +79,6 @@ public class ExtractorImpl {
                         files.add(fichero);
                     }
                 }
-                return files;
             } else {
                 System.out.println("No existe el directorio : " + dir.getPath());
             }

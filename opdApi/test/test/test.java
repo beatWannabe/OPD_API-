@@ -8,6 +8,7 @@ package test;
 import internApi.timer.TimerImpl;
 import internApi.files.FilesImpl;
 import internApi.files.transform.TransformImpl;
+import internApi.validator.ValidatorImpl;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class test {
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
+     * @throws java.net.URISyntaxException
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
         //FilesImpl.createNewFile("C:/holis", "holis.txt");
@@ -43,7 +45,7 @@ public class test {
         //FilesImpl.cretaeNewDirectory("C:\\lelelele\\");
         //TransformImpl.excelToHtml("C:\\Users\\pdgomezl\\Desktop\\registroempleados.xlsx");
         //TransformImpl.decompressFile("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS.zip", "C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
-        TransformImpl.compressToZip("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
+        //TransformImpl.compressToZip("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
     }
     
 }

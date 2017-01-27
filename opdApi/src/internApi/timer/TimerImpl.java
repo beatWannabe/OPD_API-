@@ -44,11 +44,6 @@ public class TimerImpl {
                 case HOUR_TYPE_STANDARD: {
                     return timerNormieHour(withSeparator, withFormat, completeHour);
                 }
-                //<-------- bloque de codigo estupidamente redundante
-                case ">.<": {
-                    System.out.println("Kawaii desu desu ne :3 activated! (kill your self)");
-                }
-                //------->
                 default: {
                     System.out.println("---> Error!! : No se reconoce el tipo especificado : [ " + type + " ]");
                 }
