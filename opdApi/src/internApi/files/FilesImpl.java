@@ -39,7 +39,7 @@ public class FilesImpl {
     }
 
     /**
-     * Permite sobreescriir un archivo
+     * Permite sobreescrbir un archivo
      *
      * @param url la ruta del archivo que se desea sobreescribir
      * @param name nombre del archivo que se desea sobreescribir
@@ -92,6 +92,16 @@ public class FilesImpl {
         }
     }
 
+    /**
+     * Anade texto a un archivo creado con propiedades externas
+     *
+     * @param url la ruta del archivo que se desea sobreescribir
+     * @param name nombre del archivo que se desea sobreescribir
+     * @param newLine permite insertar una neuva linea que sirve de separador
+     * @param content contenido para reemplazar
+     * @param separator un separador entre elementos
+     * @throws IOException
+     */
     public static void overrideFileCustom(String url, String name, boolean newLine, String content, String separator) throws IOException {
         BufferedWriter bw = null;
         try {
@@ -134,6 +144,12 @@ public class FilesImpl {
         }
     }
 
+    /**
+     * @deprecated 
+     * 
+     * @param clase
+     * @param exe 
+     */
     public static void createInternLog(String clase, Exception exe) {
         try {
             String ruta = "C:/LOGSLinkin/Logger.txt";
@@ -169,6 +185,12 @@ public class FilesImpl {
         }
     }
 
+    /**
+     * Permite la creacion de un nuevo directorio o carpeta en una ruta 
+     * especifica
+     * 
+     * @param ruta ruta completa del directorio
+     */
     public static void cretaeNewDirectory(String ruta) {
         try {
             File fil = new File(ruta);

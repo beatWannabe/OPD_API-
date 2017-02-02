@@ -8,6 +8,7 @@ package test;
 import internApi.timer.TimerImpl;
 import internApi.files.FilesImpl;
 import internApi.files.transform.TransformImpl;
+import internApi.text.converter.ConverterImpl;
 import internApi.validator.ValidatorImpl;
 import java.awt.Desktop;
 import java.io.File;
@@ -46,6 +47,7 @@ public class test {
         //TransformImpl.excelToHtml("C:\\Users\\pdgomezl\\Desktop\\registroempleados.xlsx");
         //TransformImpl.decompressFile("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS.zip", "C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
         //TransformImpl.compressToZip("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
+        //System.out.println(ConverterImpl.informaticSizeFromBytes(1213));
     }
-    
+
 }
