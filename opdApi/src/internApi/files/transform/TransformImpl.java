@@ -33,6 +33,12 @@ public class TransformImpl {
     private static ZipOutputStream zipOutputStream;
     private final static int BUFFER = 2048;
 
+    /**
+     * Permite descromprimir un archivo en formato zip
+     * 
+     * @param file nombre del archivo
+     * @param path ruta del archivo
+     */
     public static void decompressFileZip(String file, String path) {
         try {
             BufferedOutputStream dest = null;
@@ -84,6 +90,13 @@ public class TransformImpl {
         }
     }
 
+    /**
+     * Permite comprimir un archivo en formato zip
+     * 
+     * @param fileName nombre del archivo 
+     * @throws IOException
+     * @throws FileNotFoundException 
+     */
     public static void compressToZip(String fileName)
             throws IOException, FileNotFoundException {
         File file = new File(fileName);
@@ -134,6 +147,13 @@ public class TransformImpl {
     private static final String HTML_FILE_EXTENSION = ".html";
     private static final String TEMP_FILE_EXTENSION = ".tmp";
 
+    /**
+     * Crea un archivo de tipo html con informacion en tablas desde un archivo
+     * excel xlsx o xlx
+     * 
+     * @param ruta
+     * @throws java.io.FileNotFoundException
+     */
     public static void excelToHtml(String ruta) throws FileNotFoundException, IOException {
         File file = null;
         try {

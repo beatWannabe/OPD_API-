@@ -65,6 +65,13 @@ public class ExtractorImpl {
         return incompleteText;
     }
 
+    /**
+     * Obtiene una lista de los archivos almacenados en un directorio especifico
+     *
+     * @param path directorio
+     * @return lista de <span style="color:red" >archivos</span> en el 
+     * directorio
+     */
     public static List<File> getArchivesInDirectory(String path) {
         File dir = new File(path);
         File[] ficheros = dir.listFiles();
