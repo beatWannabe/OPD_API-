@@ -1,6 +1,8 @@
 package internApi.files.transform;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -30,12 +32,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class TransformImpl {
 
+    private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+//--------------------->
     private static ZipOutputStream zipOutputStream;
     private final static int BUFFER = 2048;
 
     /**
      * Permite descromprimir un archivo en formato zip
-     * 
+     *
      * @param file nombre del archivo
      * @param path ruta del archivo
      */
@@ -92,10 +96,10 @@ public class TransformImpl {
 
     /**
      * Permite comprimir un archivo en formato zip
-     * 
-     * @param fileName nombre del archivo 
+     *
+     * @param fileName nombre del archivo
      * @throws IOException
-     * @throws FileNotFoundException 
+     * @throws FileNotFoundException
      */
     public static void compressToZip(String fileName)
             throws IOException, FileNotFoundException {
@@ -150,7 +154,7 @@ public class TransformImpl {
     /**
      * Crea un archivo de tipo html con informacion en tablas desde un archivo
      * excel xlsx o xlx
-     * 
+     *
      * @param ruta
      * @throws java.io.FileNotFoundException
      */
@@ -208,5 +212,36 @@ public class TransformImpl {
             System.out.println(e.getMessage());
         }
     }
+    //---------------------->
+    //System.out.println("WIDTH : " +screenSize.width + " HEIGTH : " + screenSize.height);
 
+    /**
+     * Obtiene la dimencion width correcta en relacion con la pantalla y la
+     * propiedad width de un objeto
+     *
+     * @param frameWidth propiedad width del objeto
+     * @return tamaño ajustado a la pantalla
+     */
+    public static int screenDimensionWidthReziser(int frameWidth) {
+        int widthTemporalCenter = (int) SCREEN_SIZE.getWidth() / 2 - frameWidth / 2;
+        if (widthTemporalCenter < 0) {
+            widthTemporalCenter *= -1;
+        }
+        return widthTemporalCenter;
+    }
+
+    /**
+     * Obtiene la dimencion heith correcta en relacion con la pantalla y la
+     * propiedad heith de un objeto
+     *
+     * @param frameHeith propiedad heith del objeto
+     * @return tamaño ajustado a la pantalla
+     */
+    public static int screenDimensionHeithReziser(int frameHeith) {
+        int heithTemporalCenter = (int) SCREEN_SIZE.getHeight() / 2 - frameHeith / 2;
+        if (heithTemporalCenter < 0) {
+            heithTemporalCenter *= -1;
+        }
+        return heithTemporalCenter;
+    }
 }
