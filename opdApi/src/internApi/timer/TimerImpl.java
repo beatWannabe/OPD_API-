@@ -56,6 +56,69 @@ public class TimerImpl {
         return new ArrayList<>();
     }
 
+    public static List<String> getHourMap(String type, String withSeparator, boolean withFormat) {
+        try {
+            switch (type) {
+                case HOUR_TYPE_MILITAR: {
+                    return timerMilitarHour(withSeparator, withFormat, false);
+                }
+                case HOUR_TYPE_STANDARD: {
+                    return timerNormieHour(withSeparator, withFormat, false);
+                }
+                default: {
+                    System.out.println("---> Error!! : No se reconoce el tipo especificado : [ " + type + " ]");
+                }
+            }
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | ArithmeticException e) {
+            System.out.println("Ocurrio un error durante la ejecucion de el metodo "
+                    + "[getHourMap] de opdApi.timer");
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
+    public static List<String> getHourMap(String type, String withSeparator) {
+        try {
+            switch (type) {
+                case HOUR_TYPE_MILITAR: {
+                    return timerMilitarHour(withSeparator, false, false);
+                }
+                case HOUR_TYPE_STANDARD: {
+                    return timerNormieHour(withSeparator, false, false);
+                }
+                default: {
+                    System.out.println("---> Error!! : No se reconoce el tipo especificado : [ " + type + " ]");
+                }
+            }
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | ArithmeticException e) {
+            System.out.println("Ocurrio un error durante la ejecucion de el metodo "
+                    + "[getHourMap] de opdApi.timer");
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
+    public static List<String> getHourMap(String type) {
+        try {
+            switch (type) {
+                case HOUR_TYPE_MILITAR: {
+                    return timerMilitarHour("", false, false);
+                }
+                case HOUR_TYPE_STANDARD: {
+                    return timerNormieHour("", false, false);
+                }
+                default: {
+                    System.out.println("---> Error!! : No se reconoce el tipo especificado : [ " + type + " ]");
+                }
+            }
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | ArithmeticException e) {
+            System.out.println("Ocurrio un error durante la ejecucion de el metodo "
+                    + "[getHourMap] de opdApi.timer");
+            System.out.println(e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+
     //--------------------------metodos privados e implementos-----------------
     /**
      * Obtiene una lista completa de el dia en horas y minutos en formato

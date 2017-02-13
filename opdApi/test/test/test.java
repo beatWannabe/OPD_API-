@@ -48,6 +48,9 @@ public class test {
         //TransformImpl.decompressFile("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS.zip", "C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
         //TransformImpl.compressToZip("C:\\Users\\pdgomezl\\Desktop\\EXPERIMENTS");
         //System.out.println(ConverterImpl.informaticSizeFromBytes(1213));
+        /*for (String arg : TimerImpl.getHourMap("militar", ":", true, true)) {
+            System.out.println(arg);
+        }*/
     }
 
 }
