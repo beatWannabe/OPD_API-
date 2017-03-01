@@ -51,6 +51,7 @@ public class test {
         /*for (String arg : TimerImpl.getHourMap("militar", ":", true, true)) {
             System.out.println(arg);
         }*/
+        System.out.println(TimerImpl.formatSeconds((10800)));
     }
 
 }

@@ -265,4 +265,13 @@ public class TimerImpl {
         }
         return hour;
     }
+
+    //----------------->
+    public static String formatSeconds(int num) {
+        int hora, minutos, segundos;
+        hora = num / 3600;
+        minutos = (num - (3600 * hora)) / 60;
+        segundos = num - ((hora * 3600) + (minutos * 60));
+        return hora + "h " + minutos + "m " + segundos + "s";
+    }
 }
