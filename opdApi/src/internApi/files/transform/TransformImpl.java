@@ -34,8 +34,11 @@ public class TransformImpl {
 
     private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 //--------------------->
-    private static ZipOutputStream zipOutputStream;
     private final static int BUFFER = 2048;
+    private static ZipOutputStream zipOutputStream;
+    private static final String type = ".7z";
+    private static String root;
+    private static String rootName;
 
     /**
      * Permite descromprimir un archivo en formato zip
@@ -101,10 +104,21 @@ public class TransformImpl {
      * @throws IOException
      * @throws FileNotFoundException
      */
-    public static void compressToZip(String fileName)
+    public static void ToZip(String fileName)
             throws IOException, FileNotFoundException {
         File file = new File(fileName);
-        zipOutputStream = new ZipOutputStream(new FileOutputStream(file + ".zip"));
+        //------------------>
+        rootName = fileName;
+        root = "";
+        for (char object : String.valueOf(new StringBuilder(rootName).reverse()).toCharArray()) {
+            if (object != '\\') {
+                root += object;
+            } else {
+                break;
+            }
+        }
+        //------------------>
+        zipOutputStream = new ZipOutputStream(new FileOutputStream(file + type));
         recurseFiles(file);
         zipOutputStream.close();
     }
@@ -121,15 +135,20 @@ public class TransformImpl {
         } else {
             byte[] buf = new byte[1024];
             int len;
-            ZipEntry zipEntry = new ZipEntry(file.toString());
-            FileInputStream fin = new FileInputStream(file);
-            try (BufferedInputStream in = new BufferedInputStream(fin)) {
-                zipOutputStream.putNextEntry(zipEntry);
-                while ((len = in.read(buf)) >= 0) {
-                    zipOutputStream.write(buf, 0, len);
+            /*
+            String replace = urlController.getHome() + urlController.getCarpeta();
+            String s = file.toString().replace(replace, "");*/
+            ZipEntry zipEntry = new ZipEntry(file.toString().replace(rootName, new StringBuilder(root).reverse() + "->"));
+            try (FileInputStream fin = new FileInputStream(file)) {
+                try (BufferedInputStream in = new BufferedInputStream(fin)) {
+                    zipOutputStream.putNextEntry(zipEntry);
+                    while ((len = in.read(buf)) >= 0) {
+                        zipOutputStream.write(buf, 0, len);
+                    }
                 }
+                zipOutputStream.closeEntry();
+                fin.close();
             }
-            zipOutputStream.closeEntry();
         }
     }
 
